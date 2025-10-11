@@ -38,6 +38,9 @@ next-env.d.ts
 # OpenNext
 /.open-next
 
+# OpenNext
+/.idea
+
 # wrangler files
 .wrangler
 .dev.vars*
