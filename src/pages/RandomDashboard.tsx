@@ -22,13 +22,12 @@ function dataGenerator(count: number, range: number = 0) {
 const RandomDashboard: React.FC = () => {
     const [data, setData] = React.useState([]);
 
-
     return (
         <>
             <Container>
                 <Button
                     variant="contained"
-                    onClick={() => setData(dataGenerator(10))}
+                    onClick={() => setData(dataGenerator(12))}
                 >Hello world</Button>
             </Container>
             <Container>
