@@ -1,13 +1,14 @@
 'use client'
 
-import React, {useEffect} from 'react';
-import {Container, Typography, Paper} from '@mui/material';
+import React from 'react';
+import {Container, Typography} from '@mui/material';
 import Button from "@mui/material/Button";
 import {LineChart, LineSeries} from '@mui/x-charts/LineChart';
 
 function randomInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
 function dataGenerator(count: number, range: number = 0) {
     const data = [];
     for (let i = 1; i <= count; i++) {
@@ -33,13 +34,13 @@ const RandomDashboard: React.FC = () => {
             <Container>
                 <Typography variant="h4" component="h1" gutterBottom>
                     <LineChart
-                        localeText={{ noData: 'Press  the button to generate Data' }}
+                        localeText={{noData: 'Press  the button to generate Data'}}
                         dataset={
                             data
                         }
-                        xAxis={[{ dataKey: 'x'}]}
+                        xAxis={[{dataKey: 'x'}]}
                         series={
-                        [{ dataKey: 'y'}] as LineSeries[]}
+                            [{dataKey: 'y'}] as LineSeries[]}
                         height={300}
                         width={600}
                     />

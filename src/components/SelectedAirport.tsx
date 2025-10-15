@@ -6,7 +6,6 @@ import {Container, Typography} from "@mui/material";
 const AviationSelect: React.FC = () => {
 
     const aviationContext = useContext(DashboardContext)
-    const [selectedAircraft, setSelectedAircraft] = useState<string>(aviationContext.airportcode);
     return (
         <Typography>
             {aviationContext?.data && aviationContext.data[0]?.name}
