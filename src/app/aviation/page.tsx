@@ -3,13 +3,13 @@ import {Container, Typography} from "@mui/material";
 import TestAviationAutocompleteVirtualized from "@/components/Autocomplete/AviationAutocompleteVirtualized";
 import SelectedAirport from "@/components/SelectedAirport";
 import {ActiveAirport} from "../../../scripts/generateActiveAirports";
-import fs from "fs";
+import { readFileSync } from "node:fs";
 import AviationDashboard from "@/pages/AviationDashboard";
 
 export default function Page() {
 
     const activeAirportsJsonPath = './data/activeAirports.json';
-    const airports: ActiveAirport[] = JSON.parse(fs.readFileSync(activeAirportsJsonPath, 'utf8'));
+    const airports: ActiveAirport[] = JSON.parse(readFileSync(activeAirportsJsonPath, 'utf8'));
 
     return (
         <div
