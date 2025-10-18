@@ -6,6 +6,7 @@ import {
     InputLabel,
     MenuItem,
     Select,
+    TextField,
     SelectChangeEvent,
     Box,
     Typography
@@ -25,7 +26,6 @@ const AviationSelect: React.FC = () => {
         { value: 'LFPG', label: 'Paris' },
         { value: 'WIII', label: 'Jakarta' },
     ];
-    console.log(aviationContext)
 
     const handleChange = (event: SelectChangeEvent) => {
         aviationContext?.setAirportCode(event.target.value);
@@ -40,6 +40,8 @@ const AviationSelect: React.FC = () => {
 
             <FormControl fullWidth>
                 <InputLabel id="aircraft-select-label">Select Aircraft</InputLabel>
+                <TextField id="outlined-basic" label="Outlined" variant="outlined" onChange={(e) => {console.log(e)}}/>
+                <TextField onChange={(e) => {console.log(e.target.value)}}/>
                 <Select
                     labelId="aircraft-select-label"
                     id="aircraft-select"
