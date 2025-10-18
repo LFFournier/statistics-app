@@ -4,20 +4,20 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import {useTheme} from '@mui/material/styles';
 import {List, ListImperativeAPI,} from 'react-window';
 import {ActiveAirport} from "../../../scripts/generateActiveAirports";
-import {RowComponent} from "@/components/Autocomplete/row.component";
+import {AirportData, RowComponent} from "@/components/Autocomplete/row.component";
 
 export const AirportsList = React.forwardRef<
     HTMLDivElement,
     React.HTMLAttributes<HTMLElement> & {
     internalListRef?: React.Ref<ListImperativeAPI>;
-    onItemsBuilt: (optionIndexMap: Map<string, number>) => void;
+    onItemsBuilt: (optionIndexMap: Map<ActiveAirport, number>) => void;
 }
 >(function ListboxComponent(props, ref) {
     const {children, internalListRef, onItemsBuilt, ...other} = props;
-    const airports: ActiveAirport[] = [];
-    const optionIndexMap = React.useMemo(() => new Map<string, number>(), []);
+    const airports: AirportData = [];
+    const optionIndexMap = React.useMemo(() => new Map<ActiveAirport, number>(), []);
 
-    (children as ActiveAirport[]).forEach((item) => {
+    (children as AirportData).forEach((item) => {
         airports.push(item);
         if ('children' in item && Array.isArray(item.children)) {
             airports.push(...item.children);
@@ -43,7 +43,7 @@ export const AirportsList = React.forwardRef<
     const itemCount = airports.length;
     const itemSize = smUp ? 36 : 48;
 
-    const getChildSize = (child: ActiveAirport[][number]) => {
+    const getChildSize = (child: AirportData[number]) => {
         if (child.hasOwnProperty('group')) {
             return 48;
         }
@@ -68,7 +68,7 @@ export const AirportsList = React.forwardRef<
                 rowCount={itemCount}
                 rowHeight={(index) => getChildSize(airports[index])}
                 rowComponent={RowComponent}
-                rowProps={{airports}}
+                rowProps={{airportData: airports}}
                 style={{
                     height: getHeight() + 2 * 8,
                     width: '100%',

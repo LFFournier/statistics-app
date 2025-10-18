@@ -4,19 +4,19 @@ import * as React from "react";
 import {ActiveAirport} from "../../../scripts/generateActiveAirports";
 import {RowGroupComponent} from "@/components/Autocomplete/row.group.component";
 
-type ItemData = Array<
+export type AirportData = Array<
     | {
     key: number;
     group: string;
     children: React.ReactNode;
 }
-    | [React.ReactElement, string, number]
+    | [React.ReactElement, ActiveAirport, number]
 >;
-export function RowComponent({index, itemData, style}: RowComponentProps & {
-    itemData: ItemData;
+export function RowComponent({index, airportData, style}: RowComponentProps & {
+    airportData: AirportData;
 }) {
-    console.log(itemData);
-    const dataSet = itemData[index];
+    console.log(airportData);
+    const dataSet = airportData[index];
     const inlineStyle = {
         ...style,
         top: (style.top as number) + 8,

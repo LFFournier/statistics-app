@@ -36,7 +36,7 @@ const RandomDashboard: React.FC = () => {
 
             <Grid container spacing={2}>
                 {/* Latest METAR Report */}
-                <Grid item xs={12}>
+                <Grid size={{xs: 12}} >
                     <Paper elevation={2} sx={{p: 2, backgroundColor: '#f5f5f5'}}>
                         <Typography variant="subtitle2" color="textSecondary">
                             Latest METAR
@@ -48,7 +48,7 @@ const RandomDashboard: React.FC = () => {
                 </Grid>
 
                 {/* Weather Details */}
-                <Grid item xs={12} md={6}>
+                <Grid size={{xs: 12, md: 6}} >
                     <Paper elevation={1} sx={{p: 2}}>
                         <Typography variant="h6" gutterBottom>
                             Current Conditions
@@ -91,7 +91,7 @@ const RandomDashboard: React.FC = () => {
                 </Grid>
 
                 {/* Cloud Coverage */}
-                <Grid item xs={12} md={6}>
+                <Grid size={{xs: 12, md: 6}} >
                     <Paper elevation={1} sx={{p: 2}}>
                         <Typography variant="h6" gutterBottom>
                             Sky Conditions
@@ -131,13 +131,13 @@ const RandomDashboard: React.FC = () => {
                 </Grid>
 
                 {/* Station Info */}
-                <Grid item xs={12}>
+                <Grid size={{xs: 12}}>
                     <Paper elevation={1} sx={{p: 2}}>
                         <Typography variant="subtitle2" gutterBottom>
                             Station Information
                         </Typography>
                         <Grid container spacing={2}>
-                            <Grid item xs={6} sm={3}>
+                            <Grid size={{xs: 6, sm: 3}}>
                                 <Typography variant="body2" color="textSecondary">
                                     ICAO Code
                                 </Typography>
@@ -145,7 +145,7 @@ const RandomDashboard: React.FC = () => {
                                     {latestReport?.icaoId}
                                 </Typography>
                             </Grid>
-                            <Grid item xs={6} sm={3}>
+                            <Grid size={{xs: 6, sm: 3}}>
                                 <Typography variant="body2" color="textSecondary">
                                     Coordinates
                                 </Typography>
@@ -153,7 +153,7 @@ const RandomDashboard: React.FC = () => {
                                     {latestReport?.lat?.toFixed(3)}, {latestReport?.lon?.toFixed(3)}
                                 </Typography>
                             </Grid>
-                            <Grid item xs={6} sm={3}>
+                            <Grid size={{xs: 6, sm: 3}}>
                                 <Typography variant="body2" color="textSecondary">
                                     Elevation
                                 </Typography>
@@ -161,7 +161,7 @@ const RandomDashboard: React.FC = () => {
                                     {latestReport?.elev} m
                                 </Typography>
                             </Grid>
-                            <Grid item xs={6} sm={3}>
+                            <Grid size={{xs: 6, sm: 3}}>
                                 <Typography variant="body2" color="textSecondary">
                                     Report Time
                                 </Typography>
@@ -175,22 +175,22 @@ const RandomDashboard: React.FC = () => {
 
                 {/* Historical Data */}
                 {aviationContext.data.length > 1 && (
-                    <Grid item xs={12}>
+                    <Grid size={{xs: 12}}>
                         <Divider sx={{my: 2}}/>
                         <Typography variant="h6" gutterBottom>
                             Recent Reports
                         </Typography>
                         {aviationContext.data.slice(1, 4).map((report: any, index: number) => (
-                            <Paper key={index} elevation={1} sx={{p: 2, mb: 1}}>
-                                <Grid container spacing={2} alignItems="center">
-                                    <Grid item xs={12} sm={4}>
+                            <Paper key={index} elevation={1} sx={{ p: 2, mb: 1 }}>
+                                <Grid container spacing={2} alignItems="center" component="div">
+                                    <Grid size={{xs: 12, sm: 4}} component="div">
                                         <Typography variant="body2" color="textSecondary">
                                             {new Date(report.reportTime).toLocaleString()}
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={12} sm={8}>
+                                    <Grid size={{xs: 12, sm: 8}} component="div">
                                         <Typography variant="body2">
-                                            Temp: {report.temp}°C | Wind: {report.wdir}°/{report.wspd}kt |
+                                            Temp: {report.temp}°C | Wind: {report.wdir}°/{report.wspd}kt
                                             Vis: {report.visib}SM | {report.fltCat}
                                         </Typography>
                                     </Grid>
