@@ -37,7 +37,7 @@ export default function Virtualize({airports}: { airports: ActiveAirport[] }) {
 
     return (<Autocomplete
         className={'w-full'}
-        // sx={{width: 700}}
+        sx={{width: 700}}
         disableListWrap
         options={airports}
         filterOptions={filterOptions}

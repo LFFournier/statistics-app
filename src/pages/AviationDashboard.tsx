@@ -3,7 +3,7 @@ import React, {useContext} from "react";
 import {DashboardContext} from "@/providers/AviationProvider";
 import {Typography, Box, Paper, Grid, Divider, CircularProgress} from "@mui/material";
 
-const RandomDashboard: React.FC = () => {
+const AviationDashboard: React.FC = () => {
     const aviationContext = useContext(DashboardContext);
 
     if (aviationContext?.loading) {
@@ -203,4 +203,4 @@ const RandomDashboard: React.FC = () => {
         </Box>
     );
 }
-export default RandomDashboard;
+export default AviationDashboard;

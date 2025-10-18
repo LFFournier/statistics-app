@@ -17,16 +17,16 @@ export const DashboardContext = createContext<DashboardContextType | undefined>(
 
 interface DashboardProviderProps {
     children: ReactNode;
-    oaciCode?: string;
 }
 
-export function AviationProvider({ children, oaciCode = 'CYUL' }: DashboardProviderProps) {
+export function AviationProvider({ children}: DashboardProviderProps) {
     const [data, setData] = useState<DashboardData | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [airportCode, setAirportCode] = useState<string>(oaciCode);
+    const [loading, setLoading] = useState(false);
+    const [airportCode, setAirportCode] = useState<string>('');
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
+        if (!airportCode) return;
         setLoading(true);
         setError(null);
         
