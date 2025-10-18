@@ -17,7 +17,7 @@ export const DashboardContext = createContext<DashboardContextType | undefined>(
 
 interface DashboardProviderProps {
     children: ReactNode;
-    defaultOaciCode?: string;
+    oaciCode?: string;
 }
 
 export function AviationProvider({ children, oaciCode = 'CYUL' }: DashboardProviderProps) {
@@ -37,8 +37,8 @@ export function AviationProvider({ children, oaciCode = 'CYUL' }: DashboardProvi
                 }
                 return response.json();
             })
-            .then((jsonData: DashboardData) => {
-                setData(jsonData);
+            .then((jsonData: unknown) => {
+                setData(jsonData as DashboardData);
                 setLoading(false);
             })
             .catch((error) => {

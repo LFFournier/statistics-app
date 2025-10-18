@@ -50,7 +50,7 @@ export interface Airport extends ActiveAirport {
 };
 
 const activeAirports: ActiveAirport[] = Object.values(airports)
-    .filter((airport: Airport) => activeStationIds.includes(airport.icao))
+    .filter((airport: any) => activeStationIds.includes(airport.icao))
     .map((airport: any) => ({
         icao: airport.icao,
         iata: airport.iata,

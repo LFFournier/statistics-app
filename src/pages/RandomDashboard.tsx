@@ -1,15 +1,15 @@
 'use client'
 
-import React from 'react';
+import React, {useState} from 'react';
 import {Container, Typography} from '@mui/material';
 import Button from "@mui/material/Button";
 import {LineChart, LineSeries} from '@mui/x-charts/LineChart';
 
-function randomInRange(min, max) {
+function randomInRange(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function dataGenerator(count: number, range: number = 0) {
+function dataGenerator(count: number, range: number = 0): DataPoint[] {
     const data = [];
     for (let i = 1; i <= count; i++) {
         data.push({
@@ -20,8 +20,15 @@ function dataGenerator(count: number, range: number = 0) {
     return data;
 }
 
+interface DataPoint {
+    [key: string]: string | number | Date | null | undefined;
+    x: number | string;
+    y: number | string;
+}
+
 const RandomDashboard: React.FC = () => {
-    const [data, setData] = React.useState([]);
+    const [data, setData] = useState<DataPoint[]>([]);
+
 
     return (
         <>

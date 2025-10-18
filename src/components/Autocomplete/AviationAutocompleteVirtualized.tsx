@@ -10,6 +10,7 @@ import {ActiveAirport} from "../../../scripts/generateActiveAirports";
 import {matchSorter} from "match-sorter";
 import {useContext} from "react";
 import {DashboardContext} from "@/providers/AviationProvider";
+import {FilterOptionsState} from "@mui/material";
 
 const LISTBOX_PADDING = 8;
 
@@ -25,11 +26,13 @@ export default function Virtualize({airports}: { airports: ActiveAirport[] }) {
 
     const aviationContext = useContext(DashboardContext);
 
-    const handleSelection =  (event, value) => {
+    const handleSelection =  (event: React.SyntheticEvent, value: any) => {
         aviationContext?.setAirportCode(value.icao)
     }
-    const filterOptions = (options: ActiveAirport[], {inputValue}) => matchSorter(options, inputValue, {
-        keys: ['country',"icao", "name" ], threshold: matchSorter.rankings.MATCHES, limit: 10,
+    const filterOptions = (options: ActiveAirport[],
+                           { inputValue }: FilterOptionsState<ActiveAirport>
+    ) => matchSorter(options, inputValue, {
+        keys: ['country',"icao", "name" ], threshold: matchSorter.rankings.MATCHES,
     });
 
     return (<Autocomplete
