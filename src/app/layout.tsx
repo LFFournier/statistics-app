@@ -8,6 +8,7 @@ import Switch from '@mui/material/Switch';
 import { Roboto } from 'next/font/google';
 import { ThemeProvider } from '@mui/material/styles';
 import darkTheme from '@/theme/darkTheme';
+import ResponsiveAppBar from "@/components/header/navbar.component";
 
 const roboto = Roboto({
       weight: ['300', '400', '500', '700'],
@@ -35,6 +36,7 @@ export default function RootLayout({
       <body>
       <AppRouterCacheProvider>
           <ThemeProvider theme={darkTheme}>
+             <ResponsiveAppBar/>
             {children}
           </ThemeProvider>
       </AppRouterCacheProvider>
