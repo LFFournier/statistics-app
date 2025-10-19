@@ -1,7 +1,7 @@
 'use client'
 import React, {useContext, useEffect} from "react";
-import { DashboardContext } from "@/providers/AviationProvider";
-import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import {DashboardContext} from "@/providers/AviationProvider";
+import {MapContainer, TileLayer, useMap} from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 
 interface MapUpdaterProps {
@@ -9,7 +9,7 @@ interface MapUpdaterProps {
     lon: number;
 }
 
-const MapUpdater: React.FC<MapUpdaterProps> = ({ lat, lon }) => {
+const MapUpdater: React.FC<MapUpdaterProps> = ({lat, lon}) => {
     const map = useMap();
     useEffect(() => {
         map.setView([lat, lon], 13);
@@ -35,7 +35,7 @@ const Maps: React.FC = () => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
 
-                <MapUpdater lat={airport.lat} lon={airport.lon} />
+                <MapUpdater lat={airport.lat} lon={airport.lon}/>
             </MapContainer>
         </div>
     );
