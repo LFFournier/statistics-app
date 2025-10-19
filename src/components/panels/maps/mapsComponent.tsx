@@ -1,8 +1,7 @@
 'use client'
-import React, { useContext, useEffect } from "react";
+import React, {useContext, useEffect} from "react";
 import { DashboardContext } from "@/providers/AviationProvider";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
-import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
 import 'leaflet/dist/leaflet.css';
 
 interface MapUpdaterProps {
@@ -23,7 +22,6 @@ const Maps: React.FC = () => {
     const airport = aviationContext?.activeAirport;
 
     if (!airport) return null;
-
     return (
         <div className="w-full h-[300px] w-[300px] rounded-lg shadow-md">
             <MapContainer

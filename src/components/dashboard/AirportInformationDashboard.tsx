@@ -2,9 +2,9 @@
 import React, {useContext} from "react";
 import {DashboardContext} from "@/providers/AviationProvider";
 import {Box, Typography} from "@mui/material";
-import Maps from "@/components/panels/maps/mapsComponent"
 import AirportInformationCard from "@/components/panels/airport/AirportInformationCard";
-
+import dynamic from "next/dynamic";
+const Maps = dynamic(() => import( "@/components/panels/maps/mapsComponent"), { ssr: false });
 const AirportInformationDashboard: React.FC = () => {
     const aviationContext = useContext(DashboardContext);
     const airport = aviationContext?.activeAirport;

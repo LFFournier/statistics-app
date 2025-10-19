@@ -16,6 +16,11 @@ const ReportTypeToggle: React.FC = () => {
         event: React.MouseEvent<HTMLElement>,
         newReports: ReportTypeEnum[],
     ) => {
+        if (!newReports.length) {
+            return;
+        }
+        console.log(newReports)
+
         setSelectedReports(newReports);
         if (aviationContext) {
             aviationContext.setReportType({
@@ -33,10 +38,10 @@ const ReportTypeToggle: React.FC = () => {
             fullWidth={true}
             sx={{width: '100%', maxWidth: 300, margin: 'auto'}}
         >
-            <ToggleButton size="large" value={ReportTypeEnum.METAR} color="primary" aria-label="METAR">
+            <ToggleButton size="large" value={ReportTypeEnum.TAF} color="primary" aria-label="TAF">
                 TAF
             </ToggleButton>
-            <ToggleButton size="large" value={ReportTypeEnum.TAF} color="secondary" aria-label="TAF" >
+            <ToggleButton size="large" value={ReportTypeEnum.METAR} color="secondary" aria-label="METAR" >
                 METAR
             </ToggleButton>
         </ToggleButtonGroup>

@@ -3,7 +3,6 @@ import {Container, Typography} from "@mui/material";
 import TestAviationAutocompleteVirtualized from "@/components/Autocomplete/AviationAutocompleteVirtualized";
 import SelectedAirport from "@/components/SelectedAirport";
 import AviationDashboard from "@/components/dashboard/AviationDashboard";
-import activeAirports from '@data/activeAirports.json';
 import * as React from "react";
 import ReportTypeToggle from "@/components/toggle/ReportTypeToggle";
 import {ActiveAirport} from "../../../scripts/generateActiveAirports";
@@ -12,8 +11,6 @@ import AirportInformationDashboard from "@/components/dashboard/AirportInformati
 export const dynamic = 'force-static'
 
 export default function Page() {
-
-    const airports = activeAirports as ActiveAirport[];
 
     return (
         <div
@@ -30,7 +27,7 @@ export default function Page() {
                     <Container
                         className={'bg-gray-50 dark:bg-gray-800 rounded-lg p-4 shadow-md flex flex-col gap-[32px] row-start-2 items-center sm:items-start'}>
                         <div className={'flex flex-row gap-[32px] w-full'}>
-                            <TestAviationAutocompleteVirtualized airports={airports}/>
+                            <TestAviationAutocompleteVirtualized />
                             <ReportTypeToggle/>
                         </div>
                     </Container>

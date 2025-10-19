@@ -8,7 +8,7 @@ import {styled} from '@mui/material/styles';
 import {AirportsList} from "./list.component";
 import {ActiveAirport} from "../../../scripts/generateActiveAirports";
 import {matchSorter} from "match-sorter";
-import {useContext, useEffect, useMemo} from "react";
+import {useContext, useEffect, useMemo, useState} from "react";
 import {DashboardContext} from "@/providers/AviationProvider";
 import {FilterOptionsState} from "@mui/material";
 
@@ -22,7 +22,15 @@ const StyledPopper = styled(Popper)({
     },
 });
 
-export default function Virtualize({airports}: { airports: ActiveAirport[] }) {
+export default function Virtualize() {
+    const [airports, setAirports] = useState<any[]>([]);
+
+    useEffect(() => {
+        fetch('/api/data/activeAirports.json')
+            .then(res => res.json())
+            .then(setAirports);
+    }, []);
+
 
     const aviationContext = useContext(DashboardContext);
     const activeAirports = useMemo(() => {

@@ -6,7 +6,7 @@ const tafXmlPath = './data/tafs.cache.xml';
 const metarsXmlPath = './data/metars.cache.xml';
 // @Todo add isntruction to pull airports from https://github.com/mwgg/Airports/tree/master
 const airportsJsonPath = './data/airports.json';
-const outputPath = './data/activeAirports.json';
+const outputPath = './public/api/data/activeAirports.json';
 
 const metarsXmlData = fs.readFileSync(metarsXmlPath, 'utf8');
 const tafXmlData = fs.readFileSync(tafXmlPath, 'utf8');
@@ -43,12 +43,12 @@ export interface ActiveAirport {
     city: string;
     state: string;
     country: string;
-    "elevation": number,
-    "lat": number,
-    "lon": number,
-    "reports": {
-        "taf": boolean,
-        "metar": boolean
+    elevation: number,
+    lat: number,
+    lon: number,
+    reports: {
+        taf: boolean,
+        metar: boolean
     }
 }
 
@@ -63,7 +63,7 @@ const activeAirports: ActiveAirport[] = Object.values(airports)
         const hasTaf = activeTafSet.has(airport.icao);
         const hasMetar = activeMetarSet.has(airport.icao);
 
-        // if (!hasTaf && !hasMetar) return acc;
+        if (!hasTaf && !hasMetar) return acc;
 
         acc.push({
             icao: airport.icao,
