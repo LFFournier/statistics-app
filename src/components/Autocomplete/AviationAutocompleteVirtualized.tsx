@@ -35,7 +35,7 @@ export default function Virtualize({airports}: { airports: ActiveAirport[] }) {
         );
     }, [airports, aviationContext?.reportType]);
     const handleSelection =  (event: React.SyntheticEvent, value: any) => {
-        aviationContext?.setAirportCode(value.icao)
+        aviationContext?.setActiveAirport(value)
     }
     const filterOptions = (options: ActiveAirport[],
                            { inputValue }: FilterOptionsState<ActiveAirport>
@@ -44,7 +44,7 @@ export default function Virtualize({airports}: { airports: ActiveAirport[] }) {
     });
 
     return (<Autocomplete
-        className={'w-full'}
+        className={'w-full bg-red-500/25'}
         sx={{width: 700}}
         disableListWrap
         options={activeAirports}

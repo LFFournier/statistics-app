@@ -8,8 +8,8 @@ const ReportTypeToggle: React.FC = () => {
     const aviationContext = useContext(DashboardContext);
 
     const [selectedReports, setSelectedReports] = React.useState<ReportTypeEnum[]>([
-        ReportTypeEnum.METAR,
         ReportTypeEnum.TAF,
+        ReportTypeEnum.METAR,
     ]);
 
     const handleReports = (
@@ -19,8 +19,8 @@ const ReportTypeToggle: React.FC = () => {
         setSelectedReports(newReports);
         if (aviationContext) {
             aviationContext.setReportType({
-                metar: newReports.includes(ReportTypeEnum.METAR),
                 taf: newReports.includes(ReportTypeEnum.TAF),
+                metar: newReports.includes(ReportTypeEnum.METAR),
             });
         }
     };
@@ -34,10 +34,10 @@ const ReportTypeToggle: React.FC = () => {
             sx={{width: '100%', maxWidth: 300, margin: 'auto'}}
         >
             <ToggleButton size="large" value={ReportTypeEnum.METAR} color="primary" aria-label="METAR">
-                METAR
+                TAF
             </ToggleButton>
             <ToggleButton size="large" value={ReportTypeEnum.TAF} color="secondary" aria-label="TAF" >
-                TAF
+                METAR
             </ToggleButton>
         </ToggleButtonGroup>
     );
