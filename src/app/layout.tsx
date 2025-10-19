@@ -20,10 +20,10 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: "Statistics App",
     description: "Basic Statistics Demo",
-    viewport: {
-        initialScale: 1,
-        width: 'device-width',
-    },
+    // viewport: {
+    //     initialScale: 1,
+    //     width: 'device-width',
+    // },
 };
 
 export default function RootLayout({

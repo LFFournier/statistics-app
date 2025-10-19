@@ -27,7 +27,7 @@ export default function Virtualize() {
 
     useEffect(() => {
         fetch('/api/data/activeAirports.json')
-            .then(res => res.json())
+            .then(res => res.json() as Promise<any[]>)
             .then(setAirports);
     }, []);
 
