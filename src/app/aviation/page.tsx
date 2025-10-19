@@ -2,14 +2,14 @@ import {AviationProvider} from "@/providers/AviationProvider";
 import {Container, Typography} from "@mui/material";
 import TestAviationAutocompleteVirtualized from "@/components/Autocomplete/AviationAutocompleteVirtualized";
 import SelectedAirport from "@/components/SelectedAirport";
-import {ActiveAirport} from "../../../scripts/generateActiveAirports";
-import { readFileSync } from "node:fs";
 import AviationDashboard from "@/pages/AviationDashboard";
+import activeAirports from '@data/activeAirports.json';
+import * as React from "react";
 
+export const dynamic = 'force-static'
 export default function Page() {
 
-    const activeAirportsJsonPath = './data/activeAirports.json';
-    const airports: ActiveAirport[] = JSON.parse(readFileSync(activeAirportsJsonPath, 'utf8'));
+    const airports = activeAirports;
 
     return (
         <div
@@ -29,7 +29,7 @@ export default function Page() {
                     </Container>
                     <Container
                         className={'bg-yellow-500/75 rounded-lg p-4 shadow-md flex flex-col gap-[32px] row-start-2 items-center sm:items-start'}>
-                        <AviationDashboard />
+                        <AviationDashboard/>
                     </Container>
                 </AviationProvider>
             </main>

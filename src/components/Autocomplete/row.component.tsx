@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import {ActiveAirport} from "../../../scripts/generateActiveAirports";
 import {RowGroupComponent} from "@/components/Autocomplete/row.group.component";
+import {RowItemComponent} from "@/components/Autocomplete/row.item.component";
 
 export type AirportData = Array<
     | {
@@ -15,7 +16,6 @@ export type AirportData = Array<
 export function RowComponent({index, airportData, style}: RowComponentProps & {
     airportData: AirportData;
 }) {
-    console.log(airportData);
     const dataSet = airportData[index];
     const inlineStyle = {
         ...style,
@@ -30,11 +30,7 @@ export function RowComponent({index, airportData, style}: RowComponentProps & {
             />
         )
     }
-    const {key, ...optionProps} = dataSet[0];
 
-    return (
-        <Typography key={key} component="li" {...optionProps} noWrap style={inlineStyle}>
-            {`${dataSet[1].icao} - ${dataSet[1].name}`}
-        </Typography>
-    );
+    return <RowItemComponent dataset={dataSet} inlineStyle={inlineStyle}/>;
+
 }
