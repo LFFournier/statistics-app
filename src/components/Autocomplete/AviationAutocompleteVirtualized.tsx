@@ -31,7 +31,6 @@ export default function Virtualize() {
             .then(setAirports);
     }, []);
 
-
     const aviationContext = useContext(DashboardContext);
     const activeAirports = useMemo(() => {
         if (!aviationContext) return [];
@@ -55,6 +54,7 @@ export default function Virtualize() {
         className={'w-full bg-red-500/25'}
         sx={{width: 700}}
         disableListWrap
+        disabled={activeAirports.length === 0}
         options={activeAirports}
         filterOptions={filterOptions}
         groupBy={(option) => option.country.toUpperCase()}

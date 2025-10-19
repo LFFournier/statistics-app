@@ -2,12 +2,17 @@
 import {createContext, ReactNode, useEffect, useState} from 'react';
 import {ActiveAirport} from "../../scripts/generateActiveAirports";
 
-interface DashboardData {
+interface WeatherDashboardData {
+    icao: string;
+    metar?: MetarDashboardData,
+    taf?: MetarDashboardData,
+}
+interface MetarDashboardData {
     [key: string]: any;
 }
 
 interface DashboardContextType {
-    data: DashboardData | null;
+    data: WeatherDashboardData | null;
     loading: boolean;
     error: Error | null;
     activeAirport: ActiveAirport | null;
@@ -33,7 +38,7 @@ interface reportType {
 }
 
 export function AviationProvider({children}: DashboardProviderProps) {
-    const [data, setData] = useState<DashboardData | null>(null);
+    const [data, setData] = useState<WeatherDashboardData | null>(null);
     const [loading, setLoading] = useState(false);
     const [activeAirport, setActiveAirport] = useState<ActiveAirport | null>(null);
     const [reportType, setReportType] = useState<reportType>({metar: true, taf: true});
@@ -42,25 +47,30 @@ export function AviationProvider({children}: DashboardProviderProps) {
 
     useEffect(() => {
         if (!activeAirport) return;
-        // setLoading(true);
-        // setError(null);
-        //
-        // fetch(`/api/aviation/${airportCode}`)
-        //     .then((response) => {
-        //         if (!response.ok) {
-        //             throw new Error(`HTTP error! status: ${response.status}`);
-        //         }
-        //         return response.json();
-        //     })
-        //     .then((jsonData: unknown) => {
-        //         setData(jsonData as DashboardData);
-        //         setLoading(false);
-        //     })
-        //     .catch((error) => {
-        //         console.error('Error fetching dashboard data:', error);
-        //         setError(error instanceof Error ? error : new Error('Unknown error occurred'));
-        //         setLoading(false);
-        //     });
+        setLoading(true);
+        setError(null);
+
+        const params = new URLSearchParams({
+            metar: String(activeAirport.reports.metar),
+            taf:  String(activeAirport.reports.taf),
+        });
+
+        fetch(`/api/aviation/${activeAirport.icao}?${params.toString()}`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((jsonData: unknown) => {
+                setData(jsonData as WeatherDashboardData);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error('Error fetching dashboard data:', error);
+                setError(error instanceof Error ? error : new Error('Unknown error occurred'));
+                setLoading(false);
+            });
     }, [activeAirport]);
 
     return (

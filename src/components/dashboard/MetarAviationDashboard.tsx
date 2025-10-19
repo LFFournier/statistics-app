@@ -3,7 +3,7 @@ import React, {useContext} from "react";
 import {DashboardContext} from "@/providers/AviationProvider";
 import {Typography, Box, Paper, Grid, Divider, CircularProgress} from "@mui/material";
 
-const AviationDashboard: React.FC = () => {
+const MetarAviationDashboard: React.FC = () => {
     const aviationContext = useContext(DashboardContext);
 
     if (aviationContext?.loading) {
@@ -22,11 +22,11 @@ const AviationDashboard: React.FC = () => {
         );
     }
 
-    if (!aviationContext?.data || !Array.isArray(aviationContext.data)) {
+    if (!aviationContext?.data?.metar || !Array.isArray(aviationContext?.data?.metar)) {
         return <Typography>No data available</Typography>;
     }
 
-    const latestReport = aviationContext.data[0];
+    const latestReport = aviationContext?.data?.metar[0];
 
     return (
         <Box>
@@ -37,7 +37,7 @@ const AviationDashboard: React.FC = () => {
             <Grid container spacing={2}>
                 {/* Latest METAR Report */}
                 <Grid size={{xs: 12}} >
-                    <Paper elevation={2} sx={{p: 2, backgroundColor: '#f5f5f5'}}>
+                    <Paper elevation={2} sx={{p: 2}}>
                         <Typography variant="subtitle2" color="textSecondary">
                             Latest METAR
                         </Typography>
@@ -49,7 +49,7 @@ const AviationDashboard: React.FC = () => {
 
                 {/* Weather Details */}
                 <Grid size={{xs: 12, md: 6}} >
-                    <Paper elevation={1} sx={{p: 2}}>
+                    <Paper elevation={2} sx={{p: 2}}>
                         <Typography variant="h6" gutterBottom>
                             Current Conditions
                         </Typography>
@@ -92,7 +92,7 @@ const AviationDashboard: React.FC = () => {
 
                 {/* Cloud Coverage */}
                 <Grid size={{xs: 12, md: 6}} >
-                    <Paper elevation={1} sx={{p: 2}}>
+                    <Paper elevation={2} sx={{p: 2}}>
                         <Typography variant="h6" gutterBottom>
                             Sky Conditions
                         </Typography>
@@ -132,7 +132,7 @@ const AviationDashboard: React.FC = () => {
 
                 {/* Station Info */}
                 <Grid size={{xs: 12}}>
-                    <Paper elevation={1} sx={{p: 2}}>
+                    <Paper elevation={2} sx={{p: 2}}>
                         <Typography variant="subtitle2" gutterBottom>
                             Station Information
                         </Typography>
@@ -174,14 +174,14 @@ const AviationDashboard: React.FC = () => {
                 </Grid>
 
                 {/* Historical Data */}
-                {aviationContext.data.length > 1 && (
+                {aviationContext?.data?.metar.length > 1 && (
                     <Grid size={{xs: 12}}>
                         <Divider sx={{my: 2}}/>
                         <Typography variant="h6" gutterBottom>
                             Recent Reports
                         </Typography>
-                        {aviationContext.data.slice(1, 4).map((report: any, index: number) => (
-                            <Paper key={index} elevation={1} sx={{ p: 2, mb: 1 }}>
+                        {aviationContext?.data?.metar.slice(1, 4).map((report: any, index: number) => (
+                            <Paper key={index} elevation={2} sx={{ p: 2, mb: 1 }}>
                                 <Grid container spacing={2} alignItems="center" component="div">
                                     <Grid size={{xs: 12, sm: 4}} component="div">
                                         <Typography variant="body2" color="textSecondary">
@@ -203,4 +203,4 @@ const AviationDashboard: React.FC = () => {
         </Box>
     );
 }
-export default AviationDashboard;
+export default MetarAviationDashboard;

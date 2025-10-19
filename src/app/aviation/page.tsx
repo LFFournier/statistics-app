@@ -2,10 +2,11 @@ import {AviationProvider} from "@/providers/AviationProvider";
 import {Container, Typography} from "@mui/material";
 import TestAviationAutocompleteVirtualized from "@/components/Autocomplete/AviationAutocompleteVirtualized";
 import SelectedAirport from "@/components/SelectedAirport";
-import AviationDashboard from "@/components/dashboard/AviationDashboard";
+import MetarAviationDashboard from "@/components/dashboard/MetarAviationDashboard";
 import * as React from "react";
 import ReportTypeToggle from "@/components/toggle/ReportTypeToggle";
 import AirportInformationDashboard from "@/components/dashboard/AirportInformationDashboard";
+import WeatherAviationDashboard from "@/components/dashboard/WeatherAviationDashboard";
 
 export const dynamic = 'force-static'
 
@@ -35,8 +36,8 @@ export default function Page() {
                         <AirportInformationDashboard/>
                     </Container>
                     <Container
-                        className={'bg-yellow-500/75 rounded-lg p-4 shadow-md flex flex-col gap-[32px] row-start-2 items-center sm:items-start'}>
-                        <AviationDashboard/>
+                        className={'bg-gray-50 dark:bg-gray-800 rounded-lg p-4 shadow-md flex flex-col gap-[32px] row-start-2 items-center sm:items-start'}>
+                        <WeatherAviationDashboard/>
                     </Container>
                 </AviationProvider>
             </main>
