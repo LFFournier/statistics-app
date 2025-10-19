@@ -11,6 +11,8 @@ interface DashboardContextType {
     error: Error | null;
     airportCode: string;
     setAirportCode: (code: string) => void;
+    reportType: reportType;
+    setReportType: (type: reportType) => void;
 }
 
 export const DashboardContext = createContext<DashboardContextType | undefined>(undefined);
@@ -19,10 +21,21 @@ interface DashboardProviderProps {
     children: ReactNode;
 }
 
+export enum ReportTypeEnum {
+    METAR = 'metar',
+    TAF = 'taf',
+}
+
+interface reportType {
+    [ReportTypeEnum.METAR]: boolean;
+    [ReportTypeEnum.TAF]: boolean;
+}
 export function AviationProvider({ children}: DashboardProviderProps) {
     const [data, setData] = useState<DashboardData | null>(null);
     const [loading, setLoading] = useState(false);
     const [airportCode, setAirportCode] = useState<string>('');
+    const [reportType, setReportType] = useState<reportType>({metar: true, taf: true});
+
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
@@ -49,7 +62,7 @@ export function AviationProvider({ children}: DashboardProviderProps) {
     }, [airportCode]);
 
     return (
-        <DashboardContext value={{ data, loading, error,airportCode , setAirportCode }}>
+        <DashboardContext value={{ data, loading, error,airportCode , setAirportCode, reportType, setReportType }}>
             {children}
         </DashboardContext>
     );

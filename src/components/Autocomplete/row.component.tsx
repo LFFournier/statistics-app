@@ -19,7 +19,7 @@ export function RowComponent({index, airportData, style}: RowComponentProps & {
     const dataSet = airportData[index];
     const inlineStyle = {
         ...style,
-        top: (style.top as number) + 8,
+        top: 8,
     };
 
     if ('group' in dataSet) {

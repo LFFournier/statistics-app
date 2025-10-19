@@ -5,11 +5,14 @@ import SelectedAirport from "@/components/SelectedAirport";
 import AviationDashboard from "@/pages/AviationDashboard";
 import activeAirports from '@data/activeAirports.json';
 import * as React from "react";
+import ReportTypeToggle from "@/components/toggle/ReportTypeToggle";
+import {ActiveAirport} from "../../../scripts/generateActiveAirports";
 
 export const dynamic = 'force-static'
+
 export default function Page() {
 
-    const airports = activeAirports;
+    const airports = activeAirports as ActiveAirport[];
 
     return (
         <div
@@ -25,7 +28,10 @@ export default function Page() {
                     </Container>
                     <Container
                         className={'bg-yellow-700 rounded-lg p-4 shadow-md flex flex-col gap-[32px] row-start-2 items-center sm:items-start'}>
-                        <TestAviationAutocompleteVirtualized airports={airports}/>
+                        <div className={'flex flex-row gap-[32px] w-full'}>
+                            <TestAviationAutocompleteVirtualized airports={airports}/>
+                            <ReportTypeToggle/>
+                        </div>
                     </Container>
                     <Container
                         className={'bg-yellow-500/75 rounded-lg p-4 shadow-md flex flex-col gap-[32px] row-start-2 items-center sm:items-start'}>

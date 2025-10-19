@@ -63,7 +63,7 @@ const activeAirports: ActiveAirport[] = Object.values(airports)
         const hasTaf = activeTafSet.has(airport.icao);
         const hasMetar = activeMetarSet.has(airport.icao);
 
-        if (!hasTaf && !hasMetar) return acc;
+        // if (!hasTaf && !hasMetar) return acc;
 
         acc.push({
             icao: airport.icao,

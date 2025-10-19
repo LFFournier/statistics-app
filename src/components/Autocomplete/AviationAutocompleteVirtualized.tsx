@@ -8,7 +8,7 @@ import {styled} from '@mui/material/styles';
 import {AirportsList} from "./list.component";
 import {ActiveAirport} from "../../../scripts/generateActiveAirports";
 import {matchSorter} from "match-sorter";
-import {useContext} from "react";
+import {useContext, useEffect, useMemo} from "react";
 import {DashboardContext} from "@/providers/AviationProvider";
 import {FilterOptionsState} from "@mui/material";
 
@@ -25,7 +25,15 @@ const StyledPopper = styled(Popper)({
 export default function Virtualize({airports}: { airports: ActiveAirport[] }) {
 
     const aviationContext = useContext(DashboardContext);
+    const activeAirports = useMemo(() => {
+        if (!aviationContext) return [];
 
+        return airports.filter(({ reports }) =>
+            !aviationContext?.reportType.taf && !aviationContext?.reportType.metar
+                ? !reports.taf && !reports.metar
+                : (aviationContext?.reportType.taf && reports.taf) || (aviationContext?.reportType.metar && reports.metar)
+        );
+    }, [airports, aviationContext?.reportType]);
     const handleSelection =  (event: React.SyntheticEvent, value: any) => {
         aviationContext?.setAirportCode(value.icao)
     }
@@ -39,7 +47,7 @@ export default function Virtualize({airports}: { airports: ActiveAirport[] }) {
         className={'w-full'}
         sx={{width: 700}}
         disableListWrap
-        options={airports}
+        options={activeAirports}
         filterOptions={filterOptions}
         groupBy={(option) => option.country.toUpperCase()}
         renderInput={(params) => <TextField {...params} label="Airports"/>}
@@ -54,7 +62,7 @@ export default function Virtualize({airports}: { airports: ActiveAirport[] }) {
         }}
         slotProps={{
             listbox: {
-                component: AirportsList, airports: airports,
+                component: AirportsList, airports: activeAirports,
             } as any,
         }}
     />);
